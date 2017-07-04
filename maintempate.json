@@ -2,151 +2,157 @@
   "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
   "contentVersion": "1.0.0.0",
   "parameters": {
-  "adminUserName": {
+    "adminUserName": {
       "type": "string",
       "metadata": {
         "description": "Username for the Virtual Machines"
       }
     },
-  "adminPassword": {
+    "adminPassword": {
       "type": "securestring",
       "metadata": {
         "description": "Password for the Virtual Machine"
       }
     },
-  "applicationProtocols": {
-               "type": "string",
-               "defaultValue": "http-https",
-               "metadata": {
-                    "description": "The protocol(s) used by your application."
-               },
-               "allowedValues" : [
-                    "http",
-                    "https",
-                    "http-https",
-                    "https-offload"
-               ]
-          },
-  "applicationAddress": {
-               "type": "string",
-               "metadata": {
-                    "description": "The public IP address or DNS FQDN of the application that this WAF will protect."
-               }
-          },
-  "applicationServiceFqdn": {
-               "type": "string",
-               "defaultValue": "NOT_SPECIFIED",
-               "metadata": {
-                    "description": "If deploying in front of an Azure App Service, the FQDN of the public application."
-               }
-          },
-  "applicationPort": {
-               "type": "string",
-               "defaultValue": "80",
-               "metadata": {
-                    "description": "If deploying an HTTP application, the port on which your service listens for unencrypted traffic. This field is not required when deploying https only."
-               }
-          },
-  "applicationSecurePort": {
-               "type": "string",
-               "defaultValue": "443",
-               "metadata": {
-                    "description": "If deploying an HTTPS application, the port on which your service listens for encrypted traffic. This field is not required when deploying http only."
-               }
-          },
-  "sslCert": {
-               "type": "string",
-               "defaultValue": "NOT_SPECIFIED",
-               "metadata": {
-                    "description": "The SSL certificate .pfx file corresponding to public facing VIP."
-               }
-          },
-  "sslPswd": {
-               "type": "securestring",
-               "defaultValue": "NOT_SPECIFIED",
-               "metadata": {
-                    "description": "The SSL certificate .pfx file corresponding to public facing VIP."
-               }
-          },
-  "applicationType": {
-               "type": "string",
-               "defaultValue": "apache",
-               "metadata": {
-                    "description": "Is your application running on a Linux OS or a Windows OS?"
-               },     
-               "allowedValues": [
-                    "apache",
-                    "iis",
-                    "nginx",
-                    "magento",
-                    "woo",
-                    "big",
-                    "volusion",
-                    "miva",
-                    "shopify",
-                    "demandware",
-                    "os",
-                    "shop",
-                    "wordpress",
-                    "drupal",
-                    "joomla",
-                    "blogger",
-                    "vbulletin",
-                    "expression",
-                    "dnn",
-                    "adobecq",
-                    "ektron",
-                    "sharepoint",
-                    "cms"
-               ]
-          },
-  "blockingLevel": {
-               "type": "string",
-               "defaultValue": "medium",
-               "metadata": {
-                    "description": "Please select how aggressive you would like the blocking level of this WAF to be.  Remember that the more aggressive the blocking level, the more potential there is for false-positives that the WAF might detect. Select Custom to specify your own security policy below."
-               },    
-               "allowedValues": [
-                    "low",
-                    "medium",
-                    "high",
-                    "off",
-                    "custom"
-               ]
-          },
-  "customPolicy": {
-               "type": "string",
-               "defaultValue": "NOT_SPECIFIED",
-               "metadata": {
-                    "description": "Specify the publicly available URL of a custom ASM security policy in XML format. This policy will be applied in place of the standard High/Medium/Low policy as indicated above."
-               }
-          }
+    "applicationProtocols": {
+      "type": "string",
+      "defaultValue": "http-https",
+      "metadata": {
+        "description": "The protocol(s) used by your application."
+      },
+      "allowedValues": [
+        "http",
+        "https",
+        "http-https",
+        "https-offload"
+      ]
+    },
+    "applicationAddress": {
+      "type": "string",
+      "metadata": {
+        "description": "The public IP address or DNS FQDN of the application that this WAF will protect."
+      }
+    },
+    "applicationServiceFqdn": {
+      "type": "string",
+      "defaultValue": "NOT_SPECIFIED",
+      "metadata": {
+        "description": "If deploying in front of an Azure App Service, the FQDN of the public application."
+      }
+    },
+    "applicationPort": {
+      "type": "string",
+      "defaultValue": "80",
+      "metadata": {
+        "description": "If deploying an HTTP application, the port on which your service listens for unencrypted traffic. This field is not required when deploying https only."
+      }
+    },
+    "applicationSecurePort": {
+      "type": "string",
+      "defaultValue": "443",
+      "metadata": {
+        "description": "If deploying an HTTPS application, the port on which your service listens for encrypted traffic. This field is not required when deploying http only."
+      }
+    },
+    "sslCert": {
+      "type": "string",
+      "defaultValue": "NOT_SPECIFIED",
+      "metadata": {
+        "description": "The SSL certificate .pfx file corresponding to public facing VIP."
+      }
+    },
+    "sslPswd": {
+      "type": "securestring",
+      "defaultValue": "NOT_SPECIFIED",
+      "metadata": {
+        "description": "The SSL certificate .pfx file corresponding to public facing VIP."
+      }
+    },
+    "applicationType": {
+      "type": "string",
+      "defaultValue": "apache",
+      "metadata": {
+        "description": "Is your application running on a Linux OS or a Windows OS?"
+      },
+      "allowedValues": [
+        "apache",
+        "iis",
+        "nginx",
+        "magento",
+        "woo",
+        "big",
+        "volusion",
+        "miva",
+        "shopify",
+        "demandware",
+        "os",
+        "shop",
+        "wordpress",
+        "drupal",
+        "joomla",
+        "blogger",
+        "vbulletin",
+        "expression",
+        "dnn",
+        "adobecq",
+        "ektron",
+        "sharepoint",
+        "cms"
+      ]
+    },
+    "blockingLevel": {
+      "type": "string",
+      "defaultValue": "medium",
+      "metadata": {
+        "description": "Please select how aggressive you would like the blocking level of this WAF to be.  Remember that the more aggressive the blocking level, the more potential there is for false-positives that the WAF might detect. Select Custom to specify your own security policy below."
+      },
+      "allowedValues": [
+        "low",
+        "medium",
+        "high",
+        "off",
+        "custom"
+      ]
+    },
+    "customPolicy": {
+      "type": "string",
+      "defaultValue": "NOT_SPECIFIED",
+      "metadata": {
+        "description": "Specify the publicly available URL of a custom ASM security policy in XML format. This policy will be applied in place of the standard High/Medium/Low policy as indicated above."
+      }
+    }
   },
   "variables": {
+    "subScriptID": "testsubID",
+    "apiVersionCompute": "2016-03-30",
+    "apiVersionNetwork": "2015-06-15",
+    "apiVersionStorage": "2015-06-15",
+    "linkTemplateApiVersion": "2015-01-01",
     "imagePublisher": "Canonical",
     "imageOffer": "UbuntuServer",
     "imageSKU": "14.04.2-LTS",
     "vmSize": "Standard_A0",
-    "publicIPAddressName": "[concat(variables('vmName'),'.', uniqueString(resourceGroup().id)) ]",
+    "publicIPAddressName": "[concat(variables('vmName'), uniqueString(resourceGroup().id)) ]",
     "vmName": "f5Agent",
     "nicName": "[concat(variables('vmName'),'-nic')]",
     "storageAccountType": "Standard_LRS",
-    "newStorageAccountName": "[concat(tolower(variables('vmName'),uniqueString(resourceGroup().id)),'stor')]",
+    "newStorageAccountName": "[concat(tolower(variables('vmName')),tolower(uniqueString(resourceGroup().id)),'stor')]",
     "publicIPAddressType": "Dynamic",
     "addressPrefix": "10.0.0.0/16",
     "virtualNetworkName": "f5Vnet",
     "subnetName": "agentSubnet",
     "subnetPrefix": "10.0.0.0/24",
-    "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'))]",
+    "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]",
     "vmStorageAccountContainerName": "vhds",
-    "OSDiskName": "osdiskforscrapy",
+    "OSDiskName": "agentosdisk",
     "baseUrl": "https://raw.githubusercontent.com/gregcoward/whirlwind/master/",
-    "commandArgs": "[concat(' -p ',variables('appPort'),' -e ', variables('entityId'),' -d ', parameters('authFqdn'),' -a ', parameters('authIp'),' -f ', parameters('domainfqdn'),' -c ', parameters('sslCert'),' -w ', parameters('sslPswd'),' -x ', parameters('adminPassword'),' -u ', variables('iappUrl'))]"
+    "scriptLoc": "[concat(variables('baseUrl'),'onboard.sh')]",
+    "commandArgs": "[concat(' -a ',variables('subScriptID'),' -b ', parameters('applicationProtocols'),' -c ', parameters('applicationAddress'),' -d ', parameters('applicationServiceFqdn'),' -e ', parameters('applicationPort'),' -f ', parameters('applicationSecurePort'),' -g ', parameters('sslCert'),' -h ', parameters('sslPswd'), ' -i ', parameters('applicationType'),' -j ', parameters('blockingLevel'),' -k ', parameters('customPolicy'),' -l ', parameters('adminUserName'),' -m ', parameters('adminPassword'))]"
   },
   "resources": [
     {
-      "apiVersion": "2015-05-01-preview",
+      "apiVersion": "[variables('apiVersionStorage')]",
       "type": "Microsoft.Storage/storageAccounts",
       "name": "[variables('newStorageAccountName')]",
       "location": "[resourceGroup().location]",
@@ -155,21 +161,18 @@
       }
     },
     {
-      "apiVersion": "2015-05-01-preview",
+      "apiVersion": "[variables('apiVersionNetwork')]",
       "type": "Microsoft.Network/publicIPAddresses",
-      "name": "[parameters('publicIPAddressName')]",
+      "name": "[concat(variables('vmName'),'-ip')]",
       "location": "[resourceGroup().location]",
       "properties": {
-        "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
-        "dnsSettings": {
-          "domainNameLabel": "[parameters('dnsNameForPublicIP')]"
-        }
+        "publicIPAllocationMethod": "[variables('publicIPAddressType')]"
       }
     },
     {
-      "apiVersion": "2015-05-01-preview",
+      "apiVersion": "[variables('apiVersionNetwork')]",
       "type": "Microsoft.Network/virtualNetworks",
-      "name": "[parameters('virtualNetworkName')]",
+      "name": "[variables('virtualNetworkName')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "addressSpace": {
@@ -188,13 +191,13 @@
       }
     },
     {
-      "apiVersion": "2015-05-01-preview",
+      "apiVersion": "[variables('apiVersionNetwork')]",
       "type": "Microsoft.Network/networkInterfaces",
-      "name": "[parameters('nicName')]",
+      "name": "[concat(variables('vmName'),'-nic')]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
-        "[concat('Microsoft.Network/publicIPAddresses/', parameters('publicIPAddressName'))]",
-        "[concat('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'))]"
+        "[concat('Microsoft.Network/publicIPAddresses/', variables('vmName'), '-ip')]",
+        "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]"
       ],
       "properties": {
         "ipConfigurations": [
@@ -203,7 +206,7 @@
             "properties": {
               "privateIPAllocationMethod": "Dynamic",
               "publicIPAddress": {
-                "id": "[resourceId('Microsoft.Network/publicIPAddresses',parameters('publicIPAddressName'))]"
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', concat(variables('vmName'),'-ip'))]"
               },
               "subnet": {
                 "id": "[variables('subnetRef')]"
@@ -216,32 +219,32 @@
     {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Compute/virtualMachines",
-      "name": "[parameters('vmName')]",
+      "name": "[variables('vmName')]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
-        "[concat('Microsoft.Storage/storageAccounts/', parameters('newStorageAccountName'))]",
-        "[concat('Microsoft.Network/networkInterfaces/', parameters('nicName'))]"
+        "[concat('Microsoft.Storage/storageAccounts/', variables('newStorageAccountName'))]",
+        "[concat('Microsoft.Network/networkInterfaces/', variables('vmName'),'-nic')]"
       ],
       "properties": {
         "hardwareProfile": {
-          "vmSize": "[parameters('vmSize')]"
+          "vmSize": "[variables('vmSize')]"
         },
         "osProfile": {
-          "computerName": "[parameters('vmName')]",
+          "computerName": "[variables('vmName')]",
           "adminUsername": "[parameters('adminUsername')]",
           "adminPassword": "[parameters('adminPassword')]"
         },
         "storageProfile": {
           "imageReference": {
-            "publisher": "[parameters('imagePublisher')]",
-            "offer": "[parameters('imageOffer')]",
-            "sku": "[parameters('imageSKU')]",
+            "publisher": "[variables('imagePublisher')]",
+            "offer": "[variables('imageOffer')]",
+            "sku": "[variables('imageSKU')]",
             "version": "latest"
           },
           "osDisk": {
-            "name": "osdisk1",
+            "name": "agentDisk1",
             "vhd": {
-              "uri": "[concat('http://',parameters('newStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('OSDiskName'),'.vhd')]"
+              "uri": "[concat('http://',variables('newStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('OSDiskName'),'.vhd')]"
             },
             "caching": "ReadWrite",
             "createOption": "FromImage"
@@ -250,7 +253,7 @@
         "networkProfile": {
           "networkInterfaces": [
             {
-              "id": "[resourceId('Microsoft.Network/networkInterfaces',parameters('nicName'))]"
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('vmName'),'-nic'))]"
             }
           ]
         }
@@ -258,11 +261,11 @@
     },
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('vmName'),'/installscrapy')]",
+      "name": "[concat(variables('vmName'),'/onboard')]",
       "apiVersion": "2015-05-01-preview",
       "location": "[resourceGroup().location]",
       "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]"
+        "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
       ],
       "properties": {
         "publisher": "Microsoft.Azure.Extensions",
@@ -271,12 +274,18 @@
         "autoUpgradeMinorVersion": true,
         "settings": {
           "fileUris": [
-            "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/scrapy-on-ubuntu/scrapy-install-ubuntu.sh",
-            "[parameters('spiderUri')]"
+            "[variables('scriptLoc')]"
           ],
-          "commandToExecute": "[concat('sh scrapy-install-ubuntu.sh ', parameters('spiderName'))]"
+          "commandToExecute": "[concat('sh onboard.sh ', variables('commandArgs'))]"
         }
       }
     }
-  ]
+  ],
+  "outputs": {
+        "subscriptionOutput": {
+            "value": "[subscription()]",
+            "type" : "object"
+        }
+    }
+
 }
