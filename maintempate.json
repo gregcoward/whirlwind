@@ -132,12 +132,10 @@
     "imageOffer": "UbuntuServer",
     "imageSKU": "14.04.2-LTS",
     "vmSize": "Standard_A0",
-    "publicIPAddressName": "[concat(variables('vmName'), uniqueString(resourceGroup().id)) ]",
     "vmName": "f5Agent",
     "nicName": "[concat(variables('vmName'),'-nic')]",
     "storageAccountType": "Standard_LRS",
     "newStorageAccountName": "[concat(tolower(variables('vmName')),tolower(uniqueString(resourceGroup().id)),'stor')]",
-    "publicIPAddressType": "Dynamic",
     "addressPrefix": "10.0.0.0/16",
     "virtualNetworkName": "f5Vnet",
     "subnetName": "agentSubnet",
@@ -158,15 +156,6 @@
       "location": "[resourceGroup().location]",
       "properties": {
         "accountType": "[variables('storageAccountType')]"
-      }
-    },
-    {
-      "apiVersion": "[variables('apiVersionNetwork')]",
-      "type": "Microsoft.Network/publicIPAddresses",
-      "name": "[concat(variables('vmName'),'-ip')]",
-      "location": "[resourceGroup().location]",
-      "properties": {
-        "publicIPAllocationMethod": "[variables('publicIPAddressType')]"
       }
     },
     {
@@ -196,7 +185,6 @@
       "name": "[concat(variables('vmName'),'-nic')]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
-        "[concat('Microsoft.Network/publicIPAddresses/', variables('vmName'), '-ip')]",
         "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]"
       ],
       "properties": {
@@ -205,9 +193,6 @@
             "name": "ipconfig1",
             "properties": {
               "privateIPAllocationMethod": "Dynamic",
-              "publicIPAddress": {
-                "id": "[resourceId('Microsoft.Network/publicIPAddresses', concat(variables('vmName'),'-ip'))]"
-              },
               "subnet": {
                 "id": "[variables('subnetRef')]"
               }
