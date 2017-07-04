@@ -19,8 +19,6 @@ do	case "$option" in
 	 esac 
 done
 
-user="admin"
-
 # download and install Certificate
 echo "Starting Certificate download"
 certificate_location=$sslCert
@@ -29,9 +27,7 @@ curl -k -s -f --retry 5 --retry-delay 10 --retry-max-time 10 -o tenantcert.pfx $
 
 # Make webhook call to Onboarding processor
 
-     curl --data '{"subscriptionID": "'"$subscriptionID"'" ,"applicationAddress": "'"$applicationAddress"'","blockingLevel": "'"$blockingLevel"'","applicationType": "'"$applicationType"'","applicationProtocols": "'"$applicationProtocols"'", "applicationPort": "'"$applicationPort"'", "applicationSecurePort": "'"$applicationSecurePort"'", "applicationServiceFqdn": "'"$applicationServiceFqdn"'", "customPolicy": "'"$customPolicy"'"}' https://s13events.azure-automation.net/webhooks?token=1fc5iujHUDOQkUc%2b%2bU2yireoqmZdJTdEReIMzm%2bYhOk%3d
-
-	 done
+curl --data '{"subscriptionID": "'"$subscriptionID"'" ,"applicationAddress": "'"$applicationAddress"'","blockingLevel": "'"$blockingLevel"'","applicationType": "'"$applicationType"'","applicationProtocols": "'"$applicationProtocols"'", "applicationPort": "'"$applicationPort"'", "applicationSecurePort": "'"$applicationSecurePort"'", "applicationServiceFqdn": "'"$applicationServiceFqdn"'", "customPolicy": "'"$customPolicy"'"}' https://s13events.azure-automation.net/webhooks?token=1fc5iujHUDOQkUc%2b%2bU2yireoqmZdJTdEReIMzm%2bYhOk%3d
 
 # destroy webhook url
 exit
