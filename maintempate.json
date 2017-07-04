@@ -2,113 +2,153 @@
   "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "newStorageAccountName": {
-      "type": "string",
-      "metadata": {
-        "description": "Unique DNS Name for the Storage Account where the Virtual Machine's disks will be placed"
-      }
-    },
-    "dnsNameForPublicIP": {
-      "type": "string",
-      "metadata": {
-        "description": "This is the dns name of the public IP"
-      }
-    },
-    "adminUserName": {
+  "adminUserName": {
       "type": "string",
       "metadata": {
         "description": "Username for the Virtual Machines"
       }
     },
-    "adminPassword": {
+  "adminPassword": {
       "type": "securestring",
       "metadata": {
         "description": "Password for the Virtual Machine"
       }
     },
-    "imagePublisher": {
-      "type": "string",
-      "defaultValue": "Canonical",
-      "metadata": {
-        "description": "Image Publisher"
-      }
-    },
-    "imageOffer": {
-      "type": "string",
-      "defaultValue": "UbuntuServer",
-      "metadata": {
-        "description": "Image Offer"
-      }
-    },
-    "imageSKU": {
-      "type": "string",
-      "defaultValue": "14.04.2-LTS",
-      "metadata": {
-        "description": "Image SKU"
-      }
-    },
-    "vmSize": {
-      "type": "string",
-      "defaultValue": "Standard_A0",
-      "metadata": {
-        "description": "Size of the Virtual Machine"
-      }
-    },
-    "publicIPAddressName": {
-      "type": "string",
-      "metadata": {
-        "description": "Name of Public IP Address Name"
-      }
-    },
-    "vmName": {
-      "type": "string",
-      "metadata": {
-        "description": "Name of Virtual Machine"
-      }
-    },
-    "virtualNetworkName": {
-      "type": "string",
-      "metadata": {
-        "description": "Name of Virtual Network"
-      }
-    },
-    "nicName": {
-      "type": "string",
-      "metadata": {
-        "description": "Name of Network Interface"
-      }
-    },
-    "spiderName": {
-      "type": "string",
-      "defaultValue": "myspider.py",
-      "metadata": {
-        "description": "Name of the spider"
-      }
-    },
-    "spiderUri": {
-      "type": "string",
-      "defaultValue": "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/scrapy-on-ubuntu/myspider.py",
-      "metadata": {
-        "description": "Uri of the spider source"
-      }
-    }
+  "applicationProtocols": {
+               "type": "string",
+               "defaultValue": "http-https",
+               "metadata": {
+                    "description": "The protocol(s) used by your application."
+               },
+               "allowedValues" : [
+                    "http",
+                    "https",
+                    "http-https",
+                    "https-offload"
+               ]
+          },
+  "applicationAddress": {
+               "type": "string",
+               "metadata": {
+                    "description": "The public IP address or DNS FQDN of the application that this WAF will protect."
+               }
+          },
+  "applicationServiceFqdn": {
+               "type": "string",
+               "defaultValue": "NOT_SPECIFIED",
+               "metadata": {
+                    "description": "If deploying in front of an Azure App Service, the FQDN of the public application."
+               }
+          },
+  "applicationPort": {
+               "type": "string",
+               "defaultValue": "80",
+               "metadata": {
+                    "description": "If deploying an HTTP application, the port on which your service listens for unencrypted traffic. This field is not required when deploying https only."
+               }
+          },
+  "applicationSecurePort": {
+               "type": "string",
+               "defaultValue": "443",
+               "metadata": {
+                    "description": "If deploying an HTTPS application, the port on which your service listens for encrypted traffic. This field is not required when deploying http only."
+               }
+          },
+  "sslCert": {
+               "type": "string",
+               "defaultValue": "NOT_SPECIFIED",
+               "metadata": {
+                    "description": "The SSL certificate .pfx file corresponding to public facing VIP."
+               }
+          },
+  "sslPswd": {
+               "type": "securestring",
+               "defaultValue": "NOT_SPECIFIED",
+               "metadata": {
+                    "description": "The SSL certificate .pfx file corresponding to public facing VIP."
+               }
+          },
+  "applicationType": {
+               "type": "string",
+               "defaultValue": "apache",
+               "metadata": {
+                    "description": "Is your application running on a Linux OS or a Windows OS?"
+               },     
+               "allowedValues": [
+                    "apache",
+                    "iis",
+                    "nginx",
+                    "magento",
+                    "woo",
+                    "big",
+                    "volusion",
+                    "miva",
+                    "shopify",
+                    "demandware",
+                    "os",
+                    "shop",
+                    "wordpress",
+                    "drupal",
+                    "joomla",
+                    "blogger",
+                    "vbulletin",
+                    "expression",
+                    "dnn",
+                    "adobecq",
+                    "ektron",
+                    "sharepoint",
+                    "cms"
+               ]
+          },
+  "blockingLevel": {
+               "type": "string",
+               "defaultValue": "medium",
+               "metadata": {
+                    "description": "Please select how aggressive you would like the blocking level of this WAF to be.  Remember that the more aggressive the blocking level, the more potential there is for false-positives that the WAF might detect. Select Custom to specify your own security policy below."
+               },    
+               "allowedValues": [
+                    "low",
+                    "medium",
+                    "high",
+                    "off",
+                    "custom"
+               ]
+          },
+  "customPolicy": {
+               "type": "string",
+               "defaultValue": "NOT_SPECIFIED",
+               "metadata": {
+                    "description": "Specify the publicly available URL of a custom ASM security policy in XML format. This policy will be applied in place of the standard High/Medium/Low policy as indicated above."
+               }
+          }
   },
   "variables": {
+    "imagePublisher": "Canonical",
+    "imageOffer": "UbuntuServer",
+    "imageSKU": "14.04.2-LTS",
+    "vmSize": "Standard_A0",
+    "publicIPAddressName": "[concat(variables('vmName'),'.', uniqueString(resourceGroup().id)) ]",
+    "vmName": "f5Agent",
+    "nicName": "[concat(variables('vmName'),'-nic')]",
     "storageAccountType": "Standard_LRS",
+    "newStorageAccountName": "[concat(tolower(variables('vmName'),uniqueString(resourceGroup().id)),'stor')]",
     "publicIPAddressType": "Dynamic",
     "addressPrefix": "10.0.0.0/16",
-    "subnetName": "Subnet",
+    "virtualNetworkName": "f5Vnet",
+    "subnetName": "agentSubnet",
     "subnetPrefix": "10.0.0.0/24",
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'))]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]",
     "vmStorageAccountContainerName": "vhds",
-    "OSDiskName": "osdiskforscrapy"
+    "OSDiskName": "osdiskforscrapy",
+    "baseUrl": "https://raw.githubusercontent.com/gregcoward/whirlwind/master/",
+    "commandArgs": "[concat(' -p ',variables('appPort'),' -e ', variables('entityId'),' -d ', parameters('authFqdn'),' -a ', parameters('authIp'),' -f ', parameters('domainfqdn'),' -c ', parameters('sslCert'),' -w ', parameters('sslPswd'),' -x ', parameters('adminPassword'),' -u ', variables('iappUrl'))]"
   },
   "resources": [
     {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Storage/storageAccounts",
-      "name": "[parameters('newStorageAccountName')]",
+      "name": "[variables('newStorageAccountName')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "accountType": "[variables('storageAccountType')]"

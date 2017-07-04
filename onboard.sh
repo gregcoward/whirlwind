@@ -1,18 +1,20 @@
 #!/bin/bash
 export PATH="/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin/"
 
-while getopts i:p:e:d:a:f:c:w:x: option
+while getopts a:b:c:d:e:f:g:h:i:j:k: option
 do	case "$option" in
-     i) InstanceID=$OPTARG;;
-     p) CustSubID=$OPTARG;;
-     e) CustIPEndPt=$OPTARG;;
-     d) ServLevel=$OPTARG;;
-     a) Status=$OPTARG;;
-     f) AppType=$OPTARG;;
-     c) Protocol=$OPTARG;;
-     Z) sslCert=$OPTARG;;
-     w) sslPswd=$OPTARG;;
-    esac 
+     a) subscriptionID=$OPTARG;;
+     b) applicationProtocols=$OPTARG;;
+     c) applicationAddress=$OPTARG;;
+     d) applicationServiceFqdn=$OPTARG;;
+     e) applicationPort=$OPTARG;;
+     f) applicationSecurePort=$OPTARG;;
+     g) sslCert=$OPTARG;;
+     h) sslPswd=$OPTARG;;
+     i) applicationType=$OPTARG;;
+     j) blockingLevel=$OPTARG;;
+     k) customPolicy=$OPTARG;;
+	 esac 
 done
 
 user="admin"
