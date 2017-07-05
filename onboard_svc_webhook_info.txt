@@ -1,4 +1,0 @@
-
-onboard_svc  =   https://s13events.azure-automation.net/webhooks?token=1fc5iujHUDOQkUc%2b%2bU2yireoqmZdJTdEReIMzm%2bYhOk%3d
-
-curl --data '{"InstanceID": "OU812","CustSubID": "gregsubID" ,"CustIPEndPt": "192.168.56.56","ServLevel": "medium","Status": "active","AppType": "apache","Protocol": "http"}' https://s13events.azure-automation.net/webhooks?token=1fc5iujHUDOQkUc%2b%2bU2yireoqmZdJTdEReIMzm%2bYhOk%3d
