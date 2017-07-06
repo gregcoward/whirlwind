@@ -267,9 +267,6 @@
     }
   ],
   "outputs": {
-        "subscriptionOutput": {
-            "value": "[subscription()]",
-            "type" : "object"
         }
     }
 }
